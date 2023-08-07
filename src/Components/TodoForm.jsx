@@ -48,7 +48,7 @@ const TodoForm = () => {
         <form onSubmit={handleSubmit}>
         <h2>Todoes list</h2>
     <div className='field'>
-    <input type='text' className='form-control w-50' name="title" onChange={handleChange}/>
+    <input type='text' className='form-control w-50' name="title" onChange={handleChange} placeholder='Enter Title...'/>
     <select className='form-control w-25' name="periority" onChange={handleChange}>
         <option>Select...</option>
         <option value="danger">high</option>
