@@ -32,7 +32,6 @@ const TodoForm = () => {
  }
  useEffect(()=>{
    let data=JSON.parse(localStorage.getItem("mainData"))
-   console.log(data)
    if(data.length)
    {
     setMainData(data)

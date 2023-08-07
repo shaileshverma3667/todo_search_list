@@ -3,13 +3,13 @@ import { memo } from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 const TodocompleteField = ({mainData,setMainData,completeData,setCompleteData,uniqueId}) => {
 
-    const onSmash =(id)=>{
+    const pendingCheck =(id)=>{
          const data = mainData.find(data => data.id === id)
          setCompleteData(pre => [...pre,data])
          const newDatalist = mainData.filter(data => data.id !== id)
          setMainData(newDatalist)
     }
-    const onSmash2=(id)=>{
+    const CompleteCheck=(id)=>{
         const data = completeData.find(data => data.id === id)
          setMainData(pre => [...pre,data])
          const newDatalist = completeData.filter(data => data.id !== id)
@@ -34,7 +34,7 @@ const TodocompleteField = ({mainData,setMainData,completeData,setCompleteData,un
       completeData.length!=0 && completeData.map((data,index) =>{
         return<div key={index}>
           <div>
-        <input type='checkbox' name='isPending' checked onChange={()=>onSmash2(data.id)}/>
+        <input type='checkbox' name='isPending' checked onChange={()=>CompleteCheck(data.id)}/>
         <del className={`text-${data.periority}`}>{data.title}</del><DeleteIcon onClick={()=>handleDelete(data.id)}/>  </div>
         </div>
        })
@@ -49,7 +49,7 @@ const TodocompleteField = ({mainData,setMainData,completeData,setCompleteData,un
      {
       mainData.length!=0 &&  mainData.map((ele,index)=>(
             <div key={index}>
-            <input type='checkbox' onChange={()=>onSmash(ele.id)}/>
+            <input type='checkbox' onChange={()=>pendingCheck(ele.id)}/>
            <span className={`text-${ele.periority}`}> {ele.title}<DeleteIcon  onClick={()=>pendingDelete(ele.id)}/></span>
 
            </div>
