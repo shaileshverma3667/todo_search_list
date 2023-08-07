@@ -1,0 +1,9 @@
+.field{
+  display: flex;
+  flex-direction:row;
+  column-gap: 20px;
+}
+.completeField{
+    display: flex;
+    column-gap: 50px;
+}
