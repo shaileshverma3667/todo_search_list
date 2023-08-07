@@ -31,11 +31,11 @@ const TodocompleteField = ({mainData,setMainData,completeData,setCompleteData,un
      <div className='card-body'>
      <div className='completeField d-flex flex-wrap'>
      {
-     completeData.map((data,index) =>{
+      completeData.length!=0 && completeData.map((data,index) =>{
         return<div key={index}>
+          <div>
         <input type='checkbox' name='isPending' checked onChange={()=>onSmash2(data.id)}/>
-        <div>
-        <del>{data.title}</del><DeleteIcon onClick={()=>handleDelete(data.id)}/>  </div>
+        <del className={`text-${data.periority}`}>{data.title}</del><DeleteIcon onClick={()=>handleDelete(data.id)}/>  </div>
         </div>
        })
      }
@@ -47,10 +47,10 @@ const TodocompleteField = ({mainData,setMainData,completeData,setCompleteData,un
     <div className='card-header'>Pending</div>
      <div className='card-body'>
      {
-        mainData.map((ele,index)=>(
+      mainData.length!=0 &&  mainData.map((ele,index)=>(
             <div key={index}>
             <input type='checkbox' onChange={()=>onSmash(ele.id)}/>
-           <span className={`text-${ele.periority}`}> {ele.title}<DeleteIcon onClick={()=>pendingDelete(ele.id)}/></span>
+           <span className={`text-${ele.periority}`}> {ele.title}<DeleteIcon  onClick={()=>pendingDelete(ele.id)}/></span>
 
            </div>
         ))

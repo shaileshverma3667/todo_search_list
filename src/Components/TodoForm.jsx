@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./style/TodoForm.css"
 import TodocompleteField from './TodocompleteField'
 import { v4 as uuid } from 'uuid'
@@ -27,6 +27,21 @@ const TodoForm = () => {
        e.preventDefault()
        e.target.reset()
    }
+ const clearData=()=>{
+    setCompleteData([])
+ }
+ useEffect(()=>{
+   let data=JSON.parse(localStorage.getItem("mainData"))
+   console.log(data)
+   if(data.length)
+   {
+    setMainData(data)
+   }
+ },[])
+
+ useEffect(()=>{
+    localStorage.setItem("mainData",JSON.stringify(mainData))
+ },[mainData])
 
   return (
     <>
@@ -42,7 +57,7 @@ const TodoForm = () => {
         <option value="warning">low</option>
     </select>
     <button className='btn btn-success' onClick={handleAdd}>Add</button>
-    <button className='btn btn-danger'>Clear Complete</button>
+    <button className='btn btn-danger' onClick={clearData}>Clear Complete</button>
     </div>
 
     <div>
