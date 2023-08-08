@@ -20,12 +20,22 @@ const TodoForm = () => {
     }
  
    const handleAdd=()=>{
-        setMainData(pre => [...pre,formData])
-        setFormData("")
+        if(formData.title!="" && formData.periority!=""){
+          setMainData(pre => [...pre,formData])
+          setFormData({
+          id:"abc",
+          title:"",
+          isPending:"",
+          periority:""})
+        }
+        else 
+        {
+          return alert("Please fill the field")
+        }
    }
    const handleSubmit=(e)=>{
        e.preventDefault()
-       e.target.reset()
+       
    }
  const clearData=()=>{
     setCompleteData([])
@@ -46,21 +56,20 @@ const TodoForm = () => {
     <>
     <div className='container'>
         <form onSubmit={handleSubmit}>
-        <h2>Todoes list</h2>
+        <h2 className='text-secondary'>Todoes list</h2>
     <div className='field'>
-    <input type='text' className='form-control w-50' name="title" onChange={handleChange} placeholder='Enter Title...'/>
-    <select className='form-control w-25' name="periority" onChange={handleChange}>
+    <input type='text' className='form-control w-50' value={formData.title} name="title" onChange={handleChange} placeholder='Enter Title...'/>
+    <select className='form-control w-25' value={formData.periority} name="periority" onChange={handleChange}>
         <option>Select...</option>
         <option value="danger">high</option>
         <option value="info">medium</option>
-        <option value="warning">low</option>
+        <option value="secondary">low</option>
     </select>
     <button className='btn btn-success' onClick={handleAdd}>Add</button>
-    <button className='btn btn-danger' onClick={clearData}>Clear Complete</button>
     </div>
 
     <div>
-    <TodocompleteField mainData={mainData} setMainData={setMainData}  uniqueId={uniqueId} completeData={completeData} setCompleteData={setCompleteData}/>
+    <TodocompleteField mainData={mainData} setMainData={setMainData}  clearData={clearData} completeData={completeData} setCompleteData={setCompleteData}/>
     </div>
     </form>
     </div>
