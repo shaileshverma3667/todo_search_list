@@ -1,9 +1,16 @@
 .field{
   display: flex;
-  flex-direction:row;
+  flex-direction:column;
   column-gap: 20px;
+  border: 5px solid gray;
+  border-radius: 5px;
+  align-items: center;
 }
 .completeField{
     display: flex;
     column-gap: 50px;
+}
+#tablehead>th{
+  background-color:black;
+  color: white;
 }
