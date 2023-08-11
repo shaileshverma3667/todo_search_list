@@ -6,6 +6,7 @@ import TableField from './TableField'
 
 const TodoForm = () => {
     const [mainData,setMainData]=useState([])
+    const [errorMessage,setErrorMessage]=useState(false)
     const [formData,setFormData]=useState({
         id:"abc",
         title:"",
@@ -16,7 +17,13 @@ const TodoForm = () => {
 
     const handleChange=(e)=>{ 
         const {name,value}=e.target
-        setFormData((prev)=>({...prev,id:uniqueId,[name]:value}))
+        if(mainData.length){
+          setFormData((prev)=>({...prev,id:uniqueId,[name]:value,id1:mainData[mainData.length-1].id1+1}))
+        }
+        else{
+        setFormData((prev)=>({...prev,id:uniqueId,[name]:value,id1:1}))
+
+        }
     }
  
    const handleAdd=()=>{
@@ -28,15 +35,17 @@ const TodoForm = () => {
           isPending:"pending",
           periority:""
         })
+        setErrorMessage(false)
+     
         }
-        else 
+        else
         {
-          return alert("Please fill the field")
+          setErrorMessage(true)
         }
    }
    const handleSubmit=(e)=>{
        e.preventDefault()
-       e.target.reset()
+
    }
 
  useEffect(()=>{
@@ -56,16 +65,18 @@ const TodoForm = () => {
     <div className='container'>
         <form onSubmit={handleSubmit}>
         
-    <div className='field w-50 mx-auto'>
-    <h2 className='text-secondary'>Todoes Form</h2>
+    <div className='field w-50 mx-auto bg-dark'>
+    <h2 className='text-light'>Todoes Form</h2>
     <input type='text' className='form-control w-50 mb-4' value={formData.title} name="title" onChange={handleChange} placeholder='Enter Title...'/>
+    {errorMessage && formData.title=="" ?<label>Title can'not be empty</label>:""}
     <select className='form-control w-50 mb-4' value={formData.periority} name="periority" onChange={handleChange}>
         <option>Select...</option>
         <option value="high">high</option>
         <option value="medium">medium</option>
         <option value="low">low</option>
     </select>
-    <button className='btn btn-success w-50 mb-4' onClick={handleAdd}>Add</button>
+    {errorMessage && formData.periority=="" ?<label>Periority can'not be empty</label>:""}
+    <button type="submit" className='btn btn-success w-50 mb-4' onClick={handleAdd}>Add</button>
     </div>
 
     <div>

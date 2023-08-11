@@ -14,3 +14,33 @@
   background-color:black;
   color: white;
 }
+label{
+  position: relative;
+  bottom: 1.4rem;
+  color: red;
+}
+
+.peginationParent{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: rgb(81, 78, 78);
+  height: 50px;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: bold;
+  align-items: center;
+}
+
+a
+{
+  text-decoration: none !important;
+  color: white !important
+}
+
+.activepage{
+  height: 30px;
+  width: 30px;
+  border: 5px groove;
+  background-color: black;
+}
