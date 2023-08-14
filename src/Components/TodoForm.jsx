@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import "./style/TodoForm.css"
 import { v4 as uuid } from 'uuid'
 import TableField from './TableField'
+import { toast } from 'react-toastify'
 
 
 const TodoForm = () => {
@@ -36,7 +37,7 @@ const TodoForm = () => {
           periority:""
         })
         setErrorMessage(false)
-     
+        toast.success("Add Successfully")
         }
         else
         {

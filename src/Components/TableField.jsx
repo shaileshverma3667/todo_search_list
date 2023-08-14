@@ -1,10 +1,10 @@
 import React, {
+  useEffect,
   useState } from 'react'
 import { memo } from 'react'
 import SearchElement from './SearchElement'
 import ReactPaginate from 'react-paginate'
-
-
+import ArchiveField from './ArchiveField'
 
 
 const TableField = ({mainData,setMainData}) => {
@@ -19,7 +19,7 @@ const TableField = ({mainData,setMainData}) => {
     //pagination end...
     const [render, setRender] = useState(false);
     const [archieveData,setArchieveData]=useState([])
-   
+    const [showArchive,setShowArchive]=useState(false)
     //const [mainSearch,setMainSearch]=useState([])
     const [searchObj,setSearchObj]=useState({
         title:"",
@@ -64,17 +64,7 @@ const TableField = ({mainData,setMainData}) => {
     setMainData(compFilter)
     setRender(!render)
 
-    // window.localStorage.setItem("archive",JSON.stringify(copyData.filter(ele=>ele.isPending=="completed")))
    }
-   const handleArchieved=()=>{
-        setMainData([...mainData,...archieveData])
-        setArchieveData([])
-    //   let getData=JSON.parse(localStorage.getItem("archive"))
-    // if(getData){
-    //  setArchieveData(getData)
-    // }
-   
-    }
    const clearSearch=()=>{
     setSearchObj({  
     title:"",
@@ -96,16 +86,30 @@ const TableField = ({mainData,setMainData}) => {
         return mainData
       }
     }
-  
+
+
+  useEffect(()=>{
+    let data = JSON.parse(localStorage.getItem("archive"));
+    if(data)
+      setArchieveData(data);
+
+  },[])
+
+  useEffect(()=>{
+    localStorage.setItem("archive",JSON.stringify(archieveData))
+  },[archieveData])
+
+    
   return (
     <>
     <div>
        
         <div className='border border-5 border mt-4 rounded-top-2'>
+        { showArchive && <ArchiveField archieveData={archieveData} mainData={mainData} setMainData={setMainData} setArchieveData={setArchieveData} setShowArchive={setShowArchive}/>}
         <h5 className='text-center text-secondary mt-2'><u>Table List</u></h5>
          <SearchElement handleSearch={handleSearch}  clearSearch={clearSearch} searchObj={searchObj}/>
         <div className='mt-4'>
-           <button className='btn btn-secondary ms-1' onClick={handleArchieved}>Archieved</button>
+           <button className='btn btn-secondary ms-1' onClick={()=>setShowArchive(!showArchive)}>Archieved</button>
            <button className='btn btn-warning ms-2' onClick={handleCompleteDelete}>CompleteDelete</button>
         </div>
         <table className='table table-striped table-bordered mt-4'>
