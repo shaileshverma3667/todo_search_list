@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { memo } from 'react'
 const SearchElement = ({handleSearch,clearSearch,searchObj}) => {
   return (
    <>
@@ -26,4 +26,4 @@ const SearchElement = ({handleSearch,clearSearch,searchObj}) => {
   )
 }
 
-export default SearchElement
+export default memo(SearchElement)

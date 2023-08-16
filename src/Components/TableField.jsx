@@ -5,7 +5,7 @@ import { memo } from 'react'
 import SearchElement from './SearchElement'
 import ReactPaginate from 'react-paginate'
 import ArchiveField from './ArchiveField'
-
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const TableField = ({mainData,setMainData}) => {
   //pagination....
@@ -110,7 +110,7 @@ const TableField = ({mainData,setMainData}) => {
          <SearchElement handleSearch={handleSearch}  clearSearch={clearSearch} searchObj={searchObj}/>
         <div className='mt-4'>
            <button className='btn btn-secondary ms-1' onClick={()=>setShowArchive(!showArchive)}>Archieved</button>
-           <button className='btn btn-warning ms-2' onClick={handleCompleteDelete}>CompleteDelete</button>
+           <button className='btn btn-secondary ms-2' onClick={handleCompleteDelete}>CompleteDelete</button>
         </div>
         <table className='table table-striped table-bordered mt-4'>
             <thead >
@@ -141,7 +141,7 @@ const TableField = ({mainData,setMainData}) => {
                                 }</td>
                             <td>{data.isPending}</td>
                             { data.isPending!="completed" &&
-                            <td><button className='btn btn-danger' onClick={()=>handleDelete(data.id)}>Delete</button></td>
+                            <td><button className='btn text-bg-danger' onClick={()=>handleDelete(data.id)}><DeleteIcon/></button></td>
                            }
                     </tr>
                     )})
@@ -149,6 +149,7 @@ const TableField = ({mainData,setMainData}) => {
            
             </tbody>
         </table>
+        {mainData.length==0 && <p className='text-center fs-4'>{"Data not found"}</p>}
         <div className='peginationParent'>
           <ReactPaginate
            pageCount={pageCount}

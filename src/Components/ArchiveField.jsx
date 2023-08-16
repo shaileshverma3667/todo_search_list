@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { memo } from 'react'
 const ArchiveField = ({archieveData,mainData,setMainData,setArchieveData,setShowArchive}) => {
     const CompleteChange=(id)=>{
      let item= archieveData.find((data)=>data.id==id)
@@ -41,7 +41,7 @@ const ArchiveField = ({archieveData,mainData,setMainData,setArchieveData,setShow
            
             </tbody>
         </table>
-        
+        {archieveData.length==0 && <p className='text-center text-white fs-4'>{"No data found..."}</p>}
       </div>
       <div className='card-footer'>
         <button className='btn btn-warning float-end' onClick={()=>setShowArchive(false)}>Back</button>
@@ -51,4 +51,4 @@ const ArchiveField = ({archieveData,mainData,setMainData,setArchieveData,setShow
   )
 }
 
-export default ArchiveField
+export default memo(ArchiveField)

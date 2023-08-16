@@ -3,7 +3,7 @@ import "./style/TodoForm.css"
 import { v4 as uuid } from 'uuid'
 import TableField from './TableField'
 import { toast } from 'react-toastify'
-
+import { memo } from 'react'
 
 const TodoForm = () => {
     const [mainData,setMainData]=useState([])
@@ -90,4 +90,4 @@ const TodoForm = () => {
   )
 }
 
-export default TodoForm
+export default memo(TodoForm)
